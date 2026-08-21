@@ -44,7 +44,7 @@ const Experience: React.FC = () => {
   const topProgress = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <section className="relative w-full min-h-screen bg-[#020000] py-24 px-8 md:px-24 overflow-hidden">
+    <section className="relative w-full bg-[#020000] pt-24 pb-12 px-8 md:px-24 overflow-hidden">
       
       {/* Background elements */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_right,_var(--tw-gradient-stops))] from-red-900/10 via-black to-black pointer-events-none"></div>
@@ -60,7 +60,7 @@ const Experience: React.FC = () => {
           The <span className="text-red-600">Journey</span>
         </motion.h2>
 
-        <div ref={containerRef} className="relative md:mx-auto md:ml-0 ml-12 pb-24">
+        <div ref={containerRef} className="relative md:mx-auto md:ml-0 ml-12 pb-[30vh]">
           
           {/* Circular Web Base at the top */}
           <div 
@@ -102,7 +102,7 @@ const Experience: React.FC = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="mb-16 pl-12 relative group"
+              className="pb-16 pl-12 relative group"
             >
               <div className="flex flex-col">
                 <span className="text-red-500 font-hud text-xs tracking-widest uppercase mb-2">{item.date} • {item.type}</span>
