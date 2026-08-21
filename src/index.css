@@ -1,0 +1,28 @@
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=League+Gothic&family=Roboto+Condensed:wght@400;700&display=swap');
+
+body {
+  background-color: #050000;
+  color: white;
+  overflow-x: hidden;
+  user-select: none;
+  margin: 0;
+  padding: 0;
+  overscroll-behavior: none;
+}
+
+.reveal-mask {
+  -webkit-mask-image: var(--mask-image);
+  mask-image: var(--mask-image);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+
+.reverse-mask {
+  -webkit-mask-image: var(--reverse-mask-image);
+  mask-image: var(--reverse-mask-image);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
