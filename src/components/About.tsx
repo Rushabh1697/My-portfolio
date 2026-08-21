@@ -11,7 +11,11 @@ const LINKS = [
   { label: 'Email', href: 'mailto:rushabhmakwana784@gmail.com', icon: Mail }
 ];
 
-const About: React.FC = () => {
+interface AboutProps {
+  onOpenResume?: () => void;
+}
+
+const About: React.FC<AboutProps> = ({ onOpenResume }) => {
   return (
     <section className="relative w-full min-h-[70vh] bg-zinc-950 py-32 px-8 md:px-24 flex flex-col justify-center overflow-hidden border-t border-white/5">
       
@@ -40,6 +44,19 @@ const About: React.FC = () => {
           >
             Open to new opportunities, collaborations, and building AI-native products.
           </motion.p>
+
+          {onOpenResume && (
+            <motion.button
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              onClick={onOpenResume}
+              className="mt-8 px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-title tracking-widest uppercase transition-colors rounded-sm shadow-[0_0_20px_rgba(220,38,38,0.3)]"
+            >
+              View Full Resume
+            </motion.button>
+          )}
         </div>
 
         <div className="w-full lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-4">

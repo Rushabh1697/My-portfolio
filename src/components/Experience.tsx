@@ -41,7 +41,7 @@ const Experience: React.FC = () => {
     offset: ["start center", "end center"]
   });
 
-  const topProgress = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const topProgress = useTransform(scrollYProgress, [0, 1], ["0%", "85%"]);
 
   return (
     <section className="relative w-full bg-[#020000] pt-24 pb-12 px-8 md:px-24 overflow-hidden">
@@ -60,7 +60,7 @@ const Experience: React.FC = () => {
           The <span className="text-red-600">Journey</span>
         </motion.h2>
 
-        <div ref={containerRef} className="relative md:mx-auto md:ml-0 ml-12 pb-[30vh]">
+        <div ref={containerRef} className="relative md:mx-auto md:ml-0 ml-12 pb-4">
           
           {/* Circular Web Base at the top */}
           <div 
