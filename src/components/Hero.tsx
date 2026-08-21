@@ -44,17 +44,7 @@ const Hero: React.FC = () => {
     const loop = () => {
       const p = physics.current;
       
-      // Auto-float on mobile
-      if (window.innerWidth < 768) {
-        const time = Date.now() * 0.001;
-        const heroEl = document.getElementById('hero-section');
-        const height = heroEl ? heroEl.clientHeight : window.innerHeight;
-        const width = heroEl ? heroEl.clientWidth : window.innerWidth;
-        
-        p.targetX = width / 2 + Math.sin(time) * 40;
-        p.targetY = height * 0.7 + Math.cos(time * 0.8) * 30;
-        p.targetRadius = 120 + Math.sin(time * 1.5) * 15;
-      }
+      // Removed auto-float on mobile as per user feedback
 
       p.currentX += (p.targetX - p.currentX) * 0.18;
       p.currentY += (p.targetY - p.currentY) * 0.18;
@@ -99,11 +89,17 @@ const Hero: React.FC = () => {
     physics.current.targetRadius = 0;
   };
 
-  const handlePointerDown = () => {
-    physics.current.targetRadius = 230;
+  const handlePointerDown = (e: React.PointerEvent) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    physics.current.targetX = e.clientX - rect.left;
+    physics.current.targetY = e.clientY - rect.top;
+    physics.current.targetRadius = e.pointerType === 'touch' ? 180 : 230;
+    setHudActive(true);
+    setInteracted(true);
   };
 
-  const handlePointerUp = () => {
+  const handlePointerUp = (e: React.PointerEvent) => {
+    if (e.pointerType === 'touch') return; // Keep it revealed on touch devices
     if (hudActive) {
       physics.current.targetRadius = 180;
     }

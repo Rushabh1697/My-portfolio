@@ -1,33 +1,31 @@
 ---
 name: "Rushabh H. Makwana"
-title: "AI-Native Software Engineer"
-summary: "Full-stack developer specializing in rapid prototyping, AI orchestration, and system design. Passionate about using AI as a development multiplier to turn complex ideas into functional products quickly."
-github: ""
-gitlab: ""
-linkedin: ""
-email: ""
+title: "Web Developer & Founder"
+summary: "Web Developer and founder of PIXEL Forge. Passionate about creating responsive, high-performance web applications and orchestrating technical events."
+github: "https://github.com/Rushabh1697"
+gitlab: "https://gitlab.com/Rushabh1697"
+linkedin: "https://www.linkedin.com/in/rushabh-makwana-43590030a"
+email: "rushabhmakwana784@gmail.com"
 ---
-
-## Technical Skills
-
-- **AI Orchestration & Prompting:** LLMs, RAG, Tool Calling, Agentic Workflows
-- **Frontend Development:** React, TypeScript, Tailwind CSS, GSAP, Framer Motion
-- **Backend & Systems:** Node.js, Next.js, API Design, System Architecture
-- **Workflow:** Rapid Prototyping, AI-Assisted Debugging, Vibe Coding
 
 ## Experience
 
-### Full-Stack Developer
-**Company Name** • *Year - Present*
-- Architected and shipped [Product/Feature] using [Technologies].
-- Leveraged AI orchestration to accelerate development cycles by X%.
-- [Add more bullet points...]
+### Founder & Lead Developer
+**PIXEL Forge** • *Present*
+- Founded PIXEL Forge (https://pixelforge-ruddy.vercel.app/), a development agency focused on modern web solutions.
+- Lead the architecture and development of client projects.
+
+### Web Dev Co-head
+**E-Cell (K.C. College of Engineering)** • *Present*
+- Leading web development initiatives for the Entrepreneurship Cell.
+- Architecting and maintaining platforms for college-wide events and attendance tracking.
 
 ## Education
 
-**Degree in Computer Science / Engineering**
-*University Name* • *Year*
+**B.Tech in Computer Engineering (2nd Year)**
+*K. C. College Of Engineering and Management Studies and Research, Thane* • *Present*
+- Active participant in technical clubs and hackathons.
 
 ## Achievements & Certifications
-- [Achievement 1]
-- [Achievement 2]
+
+- **SINGULARITY Hackathon:** Successfully organized and conducted an intra-college 24-hour hackathon.

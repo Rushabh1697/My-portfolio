@@ -8,7 +8,7 @@ These will be rendered as large, interactive cards.
 ## KathakShades
 - **Role:** Lead Developer
 - **Stack:** React, Node.js, Tailwind CSS
-- **Repository:** https://github.com/Rushabh1697/KATHAKSHADES
+- **Repository:** [https://github.com/Rushabh1697/KATHAKSHADES](https://github.com/Rushabh1697/KATHAKSHADES)
 
 ### The Problem
 Traditional dance academies often lack a digital presence that truly captures the elegance and discipline of the art form, making it difficult to manage student enrollments and showcase performances globally.
@@ -25,7 +25,7 @@ Built a comprehensive, visually rich platform for KathakShades. The application 
 ## E-Cell Attendance System
 - **Role:** Full-Stack Developer
 - **Stack:** Next.js, TypeScript, PostgreSQL
-- **Repository:** https://github.com/Rushabh1697/ecell-attendance (or GitLab)
+- **Repository:** [View in E-Cell Organization](https://github.com/ecell/ecell-attendance)
 
 ### The Problem
 Tracking attendance for large entrepreneurship cell events manually was error-prone, slow, and provided no real-time analytics for the organizing committee.
