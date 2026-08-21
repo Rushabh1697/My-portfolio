@@ -5,36 +5,34 @@ These will be rendered as large, interactive cards.
 
 ---
 
-## Project Name
+## KathakShades
 - **Role:** Lead Developer
-- **Stack:** React, TypeScript, Node.js, OpenAI API
-- **Live Demo:** https://demo-link.com
-- **Repository:** https://github.com/username/repo
+- **Stack:** React, Node.js, Tailwind CSS
+- **Repository:** https://github.com/Rushabh1697/KATHAKSHADES
 
 ### The Problem
-[Describe the problem this project solved]
+Traditional dance academies often lack a digital presence that truly captures the elegance and discipline of the art form, making it difficult to manage student enrollments and showcase performances globally.
 
 ### The Solution
-[Describe what you built and how it solved the problem]
+Built a comprehensive, visually rich platform for KathakShades. The application serves as both an immersive digital portfolio for the academy and a functional management system for students.
 
 ### Technical Highlights
-- [Interesting technical challenge 1]
-- [Interesting technical challenge 2]
+- Cinematic scroll-based animations for an immersive cultural experience.
+- Optimized image rendering for high-resolution performance photography.
 
 ---
 
-## Another Featured Project
-- **Role:** Solo Developer
-- **Stack:** Next.js, Tailwind CSS, Supabase
-- **Live Demo:** https://demo-link.com
-- **Repository:** https://github.com/username/repo
+## E-Cell Attendance System
+- **Role:** Full-Stack Developer
+- **Stack:** Next.js, TypeScript, PostgreSQL
+- **Repository:** https://github.com/Rushabh1697/ecell-attendance (or GitLab)
 
 ### The Problem
-[Describe the problem this project solved]
+Tracking attendance for large entrepreneurship cell events manually was error-prone, slow, and provided no real-time analytics for the organizing committee.
 
 ### The Solution
-[Describe what you built and how it solved the problem]
+Developed a rapid, QR-code based attendance tracking system. Attendees scan their unique codes at checkpoints, which immediately syncs with the central PostgreSQL database.
 
 ### Technical Highlights
-- [Interesting technical challenge 1]
-- [Interesting technical challenge 2]
+- Real-time WebSocket updates for the admin dashboard.
+- High-throughput endpoint design to handle hundreds of simultaneous scans during event check-ins.

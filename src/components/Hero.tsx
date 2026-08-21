@@ -47,9 +47,10 @@ const Hero: React.FC = () => {
       // Auto-float on mobile
       if (window.innerWidth < 768) {
         const time = Date.now() * 0.001;
-        p.targetX = window.innerWidth / 2 + Math.sin(time) * 60;
-        p.targetY = window.innerHeight / 2 + Math.cos(time * 0.8) * 60;
-        p.targetRadius = 140 + Math.sin(time * 1.5) * 15;
+        p.targetX = window.innerWidth / 2 + Math.sin(time) * 40;
+        // Move the center of the mask down to where the face is on mobile
+        p.targetY = window.innerHeight * 0.7 + Math.cos(time * 0.8) * 30;
+        p.targetRadius = 120 + Math.sin(time * 1.5) * 15;
       }
 
       p.currentX += (p.targetX - p.currentX) * 0.18;
@@ -130,7 +131,7 @@ const Hero: React.FC = () => {
             ref={identityRef}
             src="/shaheer.png" 
             alt="Identity Reveal" 
-            className="h-[92vh] object-contain object-bottom pointer-events-none"
+            className="h-[92vh] w-full object-cover md:object-contain object-bottom pointer-events-none"
           />
         </div>
 
@@ -140,7 +141,7 @@ const Hero: React.FC = () => {
             ref={spidermanRef}
             src="/spiderman.png" 
             alt="Spider-Man" 
-            className="h-[92vh] object-contain object-bottom pointer-events-none"
+            className="h-[92vh] w-full object-cover md:object-contain object-bottom pointer-events-none"
           />
         </div>
       </div>

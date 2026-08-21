@@ -19,8 +19,11 @@ export async function fetchRepositories(username: string): Promise<GitHubRepo[]>
     }
     const data: GitHubRepo[] = await response.json();
     
-    // Filter out forks and empty repos to maintain quality
-    return data.filter(repo => !repo.fork && repo.description);
+    // Filter out forks, provide fallback description
+    return data.filter(repo => !repo.fork).map(repo => ({
+      ...repo,
+      description: repo.description || "Project repository."
+    }));
   } catch (error) {
     console.error("Failed to fetch GitHub repositories:", error);
     return [];
