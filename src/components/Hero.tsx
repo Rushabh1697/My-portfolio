@@ -47,9 +47,12 @@ const Hero: React.FC = () => {
       // Auto-float on mobile
       if (window.innerWidth < 768) {
         const time = Date.now() * 0.001;
-        p.targetX = window.innerWidth / 2 + Math.sin(time) * 40;
-        // Move the center of the mask down to where the face is on mobile
-        p.targetY = window.innerHeight * 0.7 + Math.cos(time * 0.8) * 30;
+        const heroEl = document.getElementById('hero-section');
+        const height = heroEl ? heroEl.clientHeight : window.innerHeight;
+        const width = heroEl ? heroEl.clientWidth : window.innerWidth;
+        
+        p.targetX = width / 2 + Math.sin(time) * 40;
+        p.targetY = height * 0.7 + Math.cos(time * 0.8) * 30;
         p.targetRadius = 120 + Math.sin(time * 1.5) * 15;
       }
 
@@ -75,8 +78,9 @@ const Hero: React.FC = () => {
   }, []);
 
   const handlePointerMove = (e: React.PointerEvent) => {
-    physics.current.targetX = e.clientX;
-    physics.current.targetY = e.clientY;
+    const rect = e.currentTarget.getBoundingClientRect();
+    physics.current.targetX = e.clientX - rect.left;
+    physics.current.targetY = e.clientY - rect.top;
   };
 
   const handlePointerEnter = (e: React.PointerEvent) => {
@@ -85,8 +89,9 @@ const Hero: React.FC = () => {
     physics.current.targetRadius = 180;
     
     // Smooth transition from current to target
-    physics.current.targetX = e.clientX;
-    physics.current.targetY = e.clientY;
+    const rect = e.currentTarget.getBoundingClientRect();
+    physics.current.targetX = e.clientX - rect.left;
+    physics.current.targetY = e.clientY - rect.top;
   };
 
   const handlePointerLeave = () => {
@@ -105,7 +110,7 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <div className="relative w-full h-screen overflow-hidden bg-spider-gradient flex items-center justify-center select-none">
+    <div id="hero-section" className="relative w-full h-screen overflow-hidden bg-spider-gradient flex items-center justify-center select-none">
       
       <Grunge />
       
@@ -146,7 +151,7 @@ const Hero: React.FC = () => {
         </div>
       </div>
 
-      <div id="hud-container" className={`fixed top-0 left-0 pointer-events-none z-[25] transition-opacity duration-300 ${hudActive ? 'opacity-100' : 'opacity-0'}`}>
+      <div id="hud-container" className={`absolute top-0 left-0 pointer-events-none z-[25] transition-opacity duration-300 ${hudActive ? 'opacity-100' : 'opacity-0'}`}>
         <HUD /> 
       </div>
 
