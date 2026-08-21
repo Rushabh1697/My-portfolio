@@ -25,6 +25,14 @@ const Hero: React.FC = () => {
   const requestRef = useRef<number>(0);
 
   useEffect(() => {
+    // On mobile, auto-activate HUD and hide instructions
+    if (window.innerWidth < 768) {
+      setHudActive(true);
+      setInteracted(true);
+    }
+  }, []);
+
+  useEffect(() => {
     if (spidermanRef.current && identityRef.current) {
       gsap.fromTo(
         [spidermanRef.current, identityRef.current],
@@ -36,6 +44,14 @@ const Hero: React.FC = () => {
     const loop = () => {
       const p = physics.current;
       
+      // Auto-float on mobile
+      if (window.innerWidth < 768) {
+        const time = Date.now() * 0.001;
+        p.targetX = window.innerWidth / 2 + Math.sin(time) * 60;
+        p.targetY = window.innerHeight / 2 + Math.cos(time * 0.8) * 60;
+        p.targetRadius = 140 + Math.sin(time * 1.5) * 15;
+      }
+
       p.currentX += (p.targetX - p.currentX) * 0.18;
       p.currentY += (p.targetY - p.currentY) * 0.18;
       p.currentRadius += (p.targetRadius - p.currentRadius) * 0.14;
@@ -101,7 +117,7 @@ const Hero: React.FC = () => {
       <Quote />
 
       <div 
-        className="absolute inset-0 z-[20] touch-none cursor-crosshair flex items-end justify-center"
+        className="absolute inset-0 z-[20] touch-pan-y cursor-crosshair flex items-end justify-center"
         onPointerMove={handlePointerMove}
         onPointerEnter={handlePointerEnter}
         onPointerLeave={handlePointerLeave}

@@ -2,6 +2,7 @@
 import Hero from './components/Hero';
 import Skills from './components/Skills';
 import Projects from './components/Projects';
+import About from './components/About';
 import { Agentation } from 'agentation';
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
       <Hero />
       <Skills />
       <Projects />
+      <About />
       <Agentation />
     </main>
   );

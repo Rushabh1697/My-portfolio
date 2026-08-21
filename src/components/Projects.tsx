@@ -6,7 +6,7 @@ import { ExternalLink, Code, Star } from 'lucide-react';
 import projectsMd from '../content/projects.md?raw';
 
 // Modify this constant to point to your actual GitHub username
-const GITHUB_USERNAME = "rushabhmakwana"; 
+const GITHUB_USERNAME = "Rushabh1697"; 
 
 const Projects: React.FC = () => {
   const [repos, setRepos] = useState<GitHubRepo[]>([]);
