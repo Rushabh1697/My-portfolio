@@ -74,9 +74,9 @@ const Projects: React.FC = () => {
                   <div className="absolute inset-0 bg-gradient-to-br from-red-500/0 via-red-500/0 to-red-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                   <div className="relative z-10 flex justify-between items-start mb-4">
-                    <Code className="w-6 h-6 text-white/40 group-hover:text-red-500 transition-colors" />
+                    <Code className="w-6 h-6 text-white/40 group-hover:text-red-500 group-hover:-translate-y-1 transition-all" />
                     {repo.homepage && (
-                      <ExternalLink className="w-5 h-5 text-white/30 group-hover:text-white/80 transition-colors" />
+                      <ExternalLink className="w-5 h-5 text-white/30 group-hover:text-white/80 group-hover:-translate-y-1 group-hover:translate-x-1 transition-all" />
                     )}
                   </div>
                   
@@ -88,7 +88,7 @@ const Projects: React.FC = () => {
                     {repo.description}
                   </p>
                   
-                  <div className="relative z-10 flex items-center justify-between text-xs font-hud text-white/40 mt-auto">
+                  <div className="relative z-10 flex items-center justify-between text-xs font-hud text-white/60 mt-auto">
                     <span>{repo.language || 'Unknown'}</span>
                     {repo.stargazers_count > 0 && (
                       <span className="flex items-center gap-1">

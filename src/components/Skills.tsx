@@ -51,7 +51,7 @@ const Skills: React.FC = () => {
         <h2 className="text-6xl md:text-8xl font-title uppercase tracking-tighter text-white/90">
           Technical <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">Arsenal</span>
         </h2>
-        <p className="font-quote text-xl md:text-3xl tracking-widest text-white/40 uppercase mt-4 max-w-2xl">
+        <p className="font-quote text-xl md:text-3xl tracking-widest text-white/60 uppercase mt-4 max-w-2xl">
           AI-Native workflow • Rapid prototyping • Production ready
         </p>
       </motion.div>

@@ -66,6 +66,7 @@ const About: React.FC<AboutProps> = ({ onOpenResume }) => {
               <motion.a
                 key={link.label}
                 href={link.href}
+                aria-label={link.label}
                 target={link.href.startsWith('http') ? "_blank" : undefined}
                 rel={link.href.startsWith('http') ? "noopener noreferrer" : undefined}
                 initial={{ opacity: 0, x: 20 }}

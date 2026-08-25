@@ -34,11 +34,16 @@ const Hero: React.FC = () => {
 
   useEffect(() => {
     if (spidermanRef.current && identityRef.current) {
-      gsap.fromTo(
-        [spidermanRef.current, identityRef.current],
-        { opacity: 0, y: '100vh' },
-        { opacity: 1, y: '0vh', duration: 1.6, delay: 0.15, ease: 'power3.out' }
-      );
+      const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+      if (!mediaQuery.matches) {
+        gsap.fromTo(
+          [spidermanRef.current, identityRef.current],
+          { opacity: 0, y: '100vh' },
+          { opacity: 1, y: '0vh', duration: 1.6, delay: 0.15, ease: 'power3.out' }
+        );
+      } else {
+        gsap.set([spidermanRef.current, identityRef.current], { opacity: 1, y: '0vh' });
+      }
     }
 
     const loop = () => {
@@ -61,8 +66,30 @@ const Hero: React.FC = () => {
       requestRef.current = requestAnimationFrame(loop);
     };
     
-    requestRef.current = requestAnimationFrame(loop);
+    const heroEl = document.getElementById('hero-section');
+    let observer: IntersectionObserver | null = null;
+
+    if (heroEl) {
+      observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          if (!requestRef.current) {
+            requestRef.current = requestAnimationFrame(loop);
+          }
+        } else {
+          if (requestRef.current) {
+            cancelAnimationFrame(requestRef.current);
+            requestRef.current = 0;
+          }
+        }
+      });
+      observer.observe(heroEl);
+    } else {
+      // Fallback if element not found immediately
+      requestRef.current = requestAnimationFrame(loop);
+    }
+
     return () => {
+      if (observer) observer.disconnect();
       if (requestRef.current) cancelAnimationFrame(requestRef.current);
     };
   }, []);

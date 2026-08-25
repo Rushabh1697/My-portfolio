@@ -42,8 +42,8 @@ export const Quote: React.FC = () => {
           lineHeight: 1.05
         }}
       >
-        GREAT POWER<br />
-        COMES FROM<br />
+        WITH GREAT POWER<br />
+        COMES<br />
         GREAT<br />
         RESPONSIBILITY
       </motion.p>
