@@ -13,13 +13,15 @@ function App() {
 
   return (
     <>
-      <main className={`w-full min-h-screen bg-black overflow-x-hidden ${showResume ? 'print:hidden' : ''}`}>
+      <main className={`w-full min-h-screen bg-black overflow-x-clip ${showResume ? 'print:hidden' : ''}`}>
         <Hero />
         <Skills />
         <Experience />
-        <Projects />
+        <div id="work">
+          <Projects />
+        </div>
         <About onOpenResume={() => setShowResume(true)} />
-        <Agentation />
+        {import.meta.env.DEV && <Agentation />}
       </main>
 
       <ResumeView isOpen={showResume} onClose={() => setShowResume(false)} />

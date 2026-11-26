@@ -1,51 +1,48 @@
-# Visual Architecture & Interaction Physics
+# Visual Architecture & Interaction
 
-## 1. Layer-by-Layer Implementation Map
+## 1. The opening
 
-| Z  | Layer | Purpose |
-|----|---|---|
-| 30 | Interaction Helper | Bottom-right hint; fades away after first interaction. |
-| 25 | Spider-Sense HUD | Dynamic spotlight tracker, rings, target marker, identity badge. |
-| 22 | Identity Reveal | `shaheer.png` masked by a radial gradient at the cursor. |
-| 20 | Spider-Man Base | Foreground Spider-Man image with GSAP entrance animation. |
-| 15 | SPIDERMAN Typography | Massive white title positioned behind the character. |
-| 12 | Quote Block | Lower-left GREAT POWER/COMES FROM/GREAT/RESPONSIBILITY. |
-| 10 | Ember Particles | 20 looping floating ember/ash particles. |
-| 0  | Grunge Background | Gradient, hotspot, canvas splatter, SVG grit, vignettes. |
+The hero is a tall section (`380vh`) with a full-screen stage that stays pinned while the visitor scrolls. Scroll progress (0 to 1), smoothed by a spring, drives everything, so scrolling back reverses the sequence.
 
-## 2. Cursor Reveal & Interaction Physics
-
-### Pointer Events
-- `onPointerMove` updates target X/Y relative to the hero container.
-- `onPointerEnter` initializes the cursor position and activates the reveal.
-- `onPointerLeave` sets the target reveal radius to 0.
-- `onPointerDown` expands the reveal to 230px.
-- `onPointerUp` returns the radius to 180px while hovering, otherwise 0.
-
-### LERP Loop
-```javascript
-const lerp = (start, end, factor) => start + (end - start) * factor;
-
-currentX = lerp(currentX, targetX, 0.18);
-currentY = lerp(currentY, targetY, 0.18);
-currentRadius = lerp(currentRadius, targetRadius, 0.14);
-```
-
-### Reveal Mask
-```css
--webkit-mask-image: radial-gradient(
-  circle ${revealRadius}px at ${mousePos.x}px ${mousePos.y}px,
-  black 35%,
-  rgba(0,0,0,0.85) 65%,
-  transparent 100%
-);
-```
-
-### Interaction Rules
-| State | Target Radius |
+| Progress | What happens |
 |---|---|
-| Pointer enters / moves | 180px |
-| Click/tap | 230px |
-| Pointer leaves | 0px |
+| 0.00-0.12 | The suit stands intact under `SPIDERMAN` |
+| 0.12-0.33 | A hole spreads from the chest as spider nanobots leave |
+| 0.33-0.55 | The swarm orbits; the pointer scatters it; the headline flips to `RUSHABH` |
+| 0.55-0.86 | Spiders land from the bottom up, and the photo forms under them behind a glowing edge |
+| 0.84-1.00 | The finished photo and the name card |
 
-*Performance target: use the continuous `requestAnimationFrame` loop to keep cursor movement smooth at 60/120fps, while avoiding unnecessary layout work. Must support full touch and drag compatibility.*
+## 2. Layers
+
+| Z | Layer |
+|---|---|
+| 40 | Skip to work link |
+| 35 | Name card |
+| 30 | Quote and scroll hint |
+| 20 | Suit image, finished photo, swarm canvas |
+| 15 | Headline |
+| 10 | Ember particles |
+| 0-1 | Gradient, grunge canvas, vignettes |
+
+## 3. Code
+
+| File | Role |
+|---|---|
+| `src/components/Hero.tsx` | Pinned stage, scroll progress, suit image, fallbacks |
+| `src/components/hero/timeline.ts` | Image anchors, pacing, spider counts |
+| `src/components/hero/sampleImage.ts` | Image placement and pixel sampling |
+| `src/components/hero/swarmRenderer.ts` | WebGL2 shaders for the spiders and the forming photo |
+| `src/components/hero/NanoSwarm.tsx` | Canvas, render loop, pointer tracking |
+| `src/components/hero/AssembledPhoto.tsx` | The finished photo |
+
+## 4. Fallbacks
+
+- **Reduced motion:** one still screen with the photo and name.
+- **No WebGL2, lost context, or sampling failure:** the suit crossfades into the photo on scroll.
+- The render loop stops while the hero is off screen.
+
+## 5. Changing a photo
+
+1. Put a transparent cutout in `public/hero/`.
+2. In `timeline.ts`, update the size, `headTop`, `centerX` and `scale` so heads and arms line up.
+3. For the photo, set `visibleHeight` to the lowest row that appears on screen.
