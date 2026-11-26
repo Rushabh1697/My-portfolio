@@ -80,11 +80,10 @@ const Experience: React.FC = () => {
 
           {/* Dynamic Web String extending from base to Spidey */}
           <motion.div
-            data-web-string
             className="absolute top-0 left-5 md:left-1/2 -translate-x-1/2 w-[24px] md:w-[30px] z-10 pointer-events-none"
             style={{
               height: topProgress,
-              // web_string.png trimmed to the thread, so it stays visible at this size.
+              // A strand cut close to the thread, so it stays visible at this size.
               backgroundImage: 'url(/web_string_tile.png)',
               backgroundRepeat: 'repeat-y',
               backgroundSize: '100% auto'

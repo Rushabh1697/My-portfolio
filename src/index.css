@@ -3,7 +3,7 @@
 @config "../tailwind.config.js";
 
 /* `hover:` and `group-hover:` also work on touch screens: while an element is
-   pressed, or while useTouchGlow has lit it near the middle of the screen. */
+   pressed, or while useTouchGlow has lit it because it is on screen. */
 @custom-variant hover {
   @media (hover: hover) {
     &:hover {

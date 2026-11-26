@@ -51,7 +51,7 @@ The hero is a tall section (`380vh`) with a full-screen stage that stays pinned 
 | Selected Work | `Projects.tsx` | Cards rendered from `src/content/projects.ts`, in order |
 | Contact | `About.tsx` | Email and resume actions, then profile links |
 
-**Touch screens:** `hover:` styles also apply while an element is pressed, and to elements marked `data-glow` while they cross the middle of the screen (`src/hooks/useTouchGlow.ts` and the `hover` variant in `src/index.css`).
+**Touch screens:** `hover:` styles also apply while an element is pressed, and to elements marked `data-glow` while they are on screen (`src/hooks/useTouchGlow.ts` and the `hover` variant in `src/index.css`).
 
 **Resume:** `ResumeView.tsx` renders `src/content/resume.ts` as a single A4 sheet, the same on screen and in print. `Skills.tsx` reads its cards from the same file; the Journey entries in `Experience.tsx` are separate and need the same facts. Edit the content there and check Print / PDF afterwards.
 
