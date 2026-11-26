@@ -1,7 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=League+Gothic&family=Roboto+Condensed:wght@400;700&display=swap');
 @import "tailwindcss";
 @config "../tailwind.config.js";
 
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=League+Gothic&family=Roboto+Condensed:wght@400;700&display=swap');
+/* `hover:` and `group-hover:` also work on touch screens: while an element is
+   pressed, or while useTouchGlow has lit it near the middle of the screen. */
+@custom-variant hover {
+  @media (hover: hover) {
+    &:hover {
+      @slot;
+    }
+  }
+  @media (hover: none) {
+    &:active,
+    &[data-lit] {
+      @slot;
+    }
+  }
+}
 
 body {
   background-color: #050000;
@@ -13,16 +28,22 @@ body {
   overscroll-behavior: none;
 }
 
-.reveal-mask {
-  -webkit-mask-image: var(--mask-image);
-  mask-image: var(--mask-image);
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-}
+@media print {
+  @page {
+    size: A4;
+    margin: 0;
+  }
 
-.reverse-mask {
-  -webkit-mask-image: var(--reverse-mask-image);
-  mask-image: var(--reverse-mask-image);
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
+  /* The open resume locks scrolling on screen, which would cut the printout. */
+  html,
+  body {
+    overflow: visible !important;
+    background: white !important;
+  }
+
+  .resume-overlay,
+  .resume-paper {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }

@@ -1,8 +1,113 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import ReactMarkdown from 'react-markdown';
 import { X, Printer } from 'lucide-react';
-import resumeMd from '../content/resume.md?raw';
+import { RESUME } from '../content/resume';
+import type { ResumeEntry, ResumeLink } from '../content/resume';
+
+const Link: React.FC<{ link: ResumeLink; className?: string }> = ({ link, className }) => (
+  <a
+    href={link.href}
+    target={link.href.startsWith('http') ? '_blank' : undefined}
+    rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+    className={`break-all hover:underline ${className ?? ''}`}
+  >
+    {link.label}
+  </a>
+);
+
+const Heading: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+  <h2 className="flex items-center gap-2 font-title uppercase tracking-wide text-[15px] leading-none text-zinc-950 mt-0 mb-2">
+    <span aria-hidden="true" className="w-1.5 h-3.5 bg-red-600" />
+    {children}
+    <span aria-hidden="true" className="flex-1 h-px bg-zinc-300" />
+  </h2>
+);
+
+const Entry: React.FC<{ entry: ResumeEntry }> = ({ entry }) => (
+  <div className="break-inside-avoid">
+    <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
+      <h3 className="m-0 text-[13px] font-bold text-zinc-950">
+        {entry.title}
+        {entry.detail && <span className="font-normal text-zinc-600"> · {entry.detail}</span>}
+      </h3>
+      <div className="shrink-0 flex gap-3 text-[11px]">
+        {entry.link && <Link link={entry.link} className="text-red-700" />}
+        {entry.meta && <span className="text-zinc-600">{entry.meta}</span>}
+      </div>
+    </div>
+    {entry.points.length > 0 && (
+      <ul className="list-disc pl-4 m-0 mt-0.5 marker:text-red-600">
+        {entry.points.map((point) => (
+          <li key={point}>{point}</li>
+        ))}
+      </ul>
+    )}
+  </div>
+);
+
+/** The printed page and the on-screen view are the same sheet. */
+const Sheet: React.FC = () => (
+  <article
+    className="bg-white text-zinc-800 text-[12.6px] leading-[1.45] select-text"
+    style={{ printColorAdjust: 'exact', WebkitPrintColorAdjust: 'exact' }}
+  >
+    <header className="bg-zinc-950 text-white border-b-[5px] border-red-600 px-5 sm:px-10 py-5">
+      <h1 className="m-0 font-title uppercase tracking-tight text-[34px] sm:text-[42px] leading-none">{RESUME.name}</h1>
+      <p className="m-0 mt-1.5 font-quote uppercase tracking-[0.18em] text-[17px] text-red-500">{RESUME.role}</p>
+      <ul className="list-none p-0 m-0 mt-3 flex flex-wrap gap-x-4 gap-y-1 text-[11px] text-zinc-200">
+        <li>{RESUME.location}</li>
+        {RESUME.contacts.map((contact) => (
+          <li key={contact.href}>
+            <Link link={contact} />
+          </li>
+        ))}
+      </ul>
+    </header>
+
+    <div className="px-5 sm:px-10 pt-4 pb-6 flex flex-col gap-4">
+      <p className="m-0 text-[13px] text-zinc-900">{RESUME.summary}</p>
+
+      <ul className="list-none p-0 m-0 grid grid-cols-1 sm:grid-cols-3 gap-2">
+        {RESUME.highlights.map((highlight) => (
+          <li key={highlight.label} className="flex items-center gap-2.5 border border-zinc-300 border-l-4 border-l-red-600 px-3 py-1.5">
+            <span className="font-title text-[22px] leading-none text-zinc-950 whitespace-nowrap">{highlight.value}</span>
+            <span className="text-[10.5px] leading-tight text-zinc-600">{highlight.label}</span>
+          </li>
+        ))}
+      </ul>
+
+      {RESUME.sections.map((section) => (
+        <section key={section.heading}>
+          <Heading>{section.heading}</Heading>
+          <div className="flex flex-col gap-1.5">
+            {section.entries.map((entry) => (
+              <Entry key={`${entry.title}-${entry.detail}`} entry={entry} />
+            ))}
+          </div>
+        </section>
+      ))}
+
+      <section className="break-inside-avoid">
+        <Heading>Skills</Heading>
+        <dl className="m-0 flex flex-col gap-0.5">
+          {RESUME.skills.map((skill) => (
+            <div key={skill.group} className="flex gap-2">
+              <dt className="w-24 shrink-0 font-bold text-zinc-950">{skill.group}</dt>
+              <dd className="m-0">{skill.items.join(', ')}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <section className="break-inside-avoid">
+        <Heading>Education</Heading>
+        <Entry
+          entry={{ title: RESUME.education.degree, detail: RESUME.education.school, meta: RESUME.education.meta, points: [] }}
+        />
+      </section>
+    </div>
+  </article>
+);
 
 interface ResumeViewProps {
   isOpen: boolean;
@@ -10,14 +115,6 @@ interface ResumeViewProps {
 }
 
 const ResumeView: React.FC<ResumeViewProps> = ({ isOpen, onClose }) => {
-  const [content, setContent] = useState('');
-
-  useEffect(() => {
-    // Strip YAML frontmatter from markdown
-    const strippedContent = resumeMd.replace(/---[\s\S]*?---/, '').trim();
-    setContent(strippedContent);
-  }, []);
-
   // Handle escape key to close
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
@@ -27,91 +124,53 @@ const ResumeView: React.FC<ResumeViewProps> = ({ isOpen, onClose }) => {
     return () => window.removeEventListener('keydown', handleEsc);
   }, [onClose]);
 
-  // Lock body scroll when open
+  // Lock body scroll when open. Browsers name the saved PDF after the page title.
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
+    if (!isOpen) return;
+    const title = document.title;
+    document.title = 'Rushabh-Makwana-Resume';
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.title = title;
       document.body.style.overflow = 'unset';
-    }
-    return () => { document.body.style.overflow = 'unset'; };
+    };
   }, [isOpen]);
-
-  const handlePrint = () => {
-    window.print();
-  };
 
   return (
     <AnimatePresence>
       {isOpen && (
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-md p-4 md:p-8 print:bg-white print:p-0 print:block"
+          className="resume-overlay fixed inset-0 z-[100] flex flex-col items-center justify-center gap-3 bg-black/85 backdrop-blur-md p-3 md:p-6 print:static print:block print:p-0 print:bg-white"
         >
           {/* Controls - Hidden during print */}
-          <div className="absolute top-6 right-6 flex gap-4 z-50 print:hidden">
-            <button 
-              onClick={handlePrint}
+          <div className="shrink-0 w-full max-w-[794px] flex justify-end gap-3 print:hidden">
+            <button
+              onClick={() => window.print()}
               className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md font-title tracking-wider uppercase transition-colors"
             >
               <Printer size={18} />
               <span>Print / PDF</span>
             </button>
-            <button 
+            <button
               onClick={onClose}
+              aria-label="Close resume"
               className="p-2 bg-white/10 hover:bg-white/20 text-white rounded-full transition-colors"
             >
               <X size={24} />
             </button>
           </div>
 
-          {/* Resume Document Container */}
-          <motion.div 
+          {/* A4 is 794px wide on screen. */}
+          <motion.div
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 50, opacity: 0 }}
-            className="w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-zinc-900 rounded-xl shadow-2xl custom-scrollbar print:max-h-none print:overflow-visible print:bg-white print:shadow-none print:rounded-none"
+            className="resume-paper w-full max-w-[794px] min-h-0 overflow-y-auto rounded-lg shadow-2xl bg-white print:max-w-none print:overflow-visible print:rounded-none print:shadow-none"
           >
-            <div className="p-8 md:p-12 lg:p-16">
-              
-              {/* Header section (Rendered from Frontmatter data manually for styling) */}
-              <div className="border-b border-white/10 print:border-black/20 pb-8 mb-8">
-                <h1 className="text-4xl md:text-5xl font-title uppercase text-white print:text-black tracking-tight mb-2">Rushabh H. Makwana</h1>
-                <h2 className="text-xl md:text-2xl text-red-500 font-hud tracking-widest uppercase mb-6">Web Developer & Founder</h2>
-                
-                <p className="text-white/70 print:text-black/80 max-w-2xl leading-relaxed mb-6">
-                  Web Developer and founder of PIXEL Forge. Passionate about creating responsive, high-performance web applications and orchestrating technical events.
-                </p>
-
-                <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-white/50 print:text-black/60 font-mono">
-                  <a href="mailto:rushabhmakwana784@gmail.com" className="hover:text-red-400">rushabhmakwana784@gmail.com</a>
-                  <a href="https://github.com/Rushabh1697" target="_blank" rel="noreferrer" className="hover:text-red-400">GitHub</a>
-                  <a href="https://gitlab.com/Rushabh1697" target="_blank" rel="noreferrer" className="hover:text-red-400">GitLab</a>
-                  <a href="https://www.linkedin.com/in/rushabh-makwana-43590030a" target="_blank" rel="noreferrer" className="hover:text-red-400">LinkedIn</a>
-                </div>
-              </div>
-
-              {/* Markdown Content */}
-              <div className="prose prose-invert prose-red max-w-none print:prose-p:text-black print:prose-headings:text-black print:prose-strong:text-black print:prose-li:text-black print:prose-a:text-black">
-                <ReactMarkdown
-                  components={{
-                    h2: ({node, ...props}) => <h2 className="text-2xl font-title uppercase tracking-wide text-white print:text-black mt-12 mb-6 border-b border-white/10 print:border-black/20 pb-2" {...props} />,
-                    h3: ({node, ...props}) => <h3 className="text-xl font-bold text-white/90 print:text-black mt-8 mb-2" {...props} />,
-                    p: ({node, ...props}) => <p className="text-white/70 print:text-black/80 my-2" {...props} />,
-                    ul: ({node, ...props}) => <ul className="list-disc list-inside text-white/70 print:text-black/80 my-4 space-y-1" {...props} />,
-                    li: ({node, ...props}) => <li className="marker:text-red-500" {...props} />,
-                    strong: ({node, ...props}) => <strong className="text-white print:text-black font-bold" {...props} />,
-                    em: ({node, ...props}) => <em className="text-red-400 font-hud text-sm uppercase tracking-wider not-italic ml-2" {...props} />,
-                    a: ({node, ...props}) => <a className="text-red-500 hover:text-red-400 underline" target="_blank" rel="noopener noreferrer" {...props} />,
-                  }}
-                >
-                  {content}
-                </ReactMarkdown>
-              </div>
-
-            </div>
+            <Sheet />
           </motion.div>
         </motion.div>
       )}
