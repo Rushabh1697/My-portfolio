@@ -30,6 +30,10 @@ export const RESUME = {
     { label: 'rushabhmakwana784@gmail.com', href: 'mailto:rushabhmakwana784@gmail.com' },
     { label: 'github.com/Rushabh1697', href: 'https://github.com/Rushabh1697' },
     { label: 'linkedin.com/in/rushabh-makwana-43590030a', href: 'https://www.linkedin.com/in/rushabh-makwana-43590030a' },
+    {
+      label: 'Portfolio: my-portfolio-five-pink-4y38i6keto.vercel.app',
+      href: 'https://my-portfolio-five-pink-4y38i6keto.vercel.app/',
+    },
   ] satisfies ResumeLink[],
   summary:
     'Web developer who ships real products: paid websites for three clients, platforms for my college Entrepreneurship Cell, and an Android-to-PC game controller. Computer Engineering student (class of 2029), open to web development internships and freelance work.',
