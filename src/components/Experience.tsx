@@ -1,35 +1,44 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
+// Keep these facts in step with src/content/resume.ts.
 const EXPERIENCE_DATA = [
   {
     type: 'experience',
-    title: 'Founder & Lead Developer',
+    title: 'Founder & Developer',
     organization: 'PIXEL Forge',
     date: 'Present',
-    description: 'Founded PIXEL Forge, a development agency focused on modern web solutions. Leading the architecture and development of client projects.',
+    description: 'Run a solo web and app studio. Built paid websites for three clients, all live: Kathak Shades, Jai Mataji Art Furniture and Urbanaxis Studio.',
     link: 'https://pixelforge-web-eta.vercel.app/'
   },
   {
     type: 'experience',
     title: 'Web Dev Co-head',
-    organization: 'E-Cell',
+    organization: 'E-Cell, K.C. College of Engineering',
     date: 'Present',
-    description: 'Leading web development initiatives for the Entrepreneurship Cell at K.C. College of Engineering. Architecting platforms for college-wide events.'
+    description: 'Lead contributor to the E-Cell website rebuild and to the attendance system E-Cell uses. Also contributed to the website for “the commons.”, a KC College campus app.'
   },
   {
-    type: 'education',
-    title: 'B.Tech in Computer Engineering (2nd Year)',
-    organization: 'K. C. College Of Engineering, Thane',
-    date: 'Present',
-    description: 'Currently pursuing my Bachelors degree while actively participating in technical clubs and orchestrating hackathons.'
+    type: 'leadership',
+    title: 'Tech Head, Core Team',
+    organization: 'SINGULARITY 2.0',
+    date: '16–17 Jan 2027',
+    description: 'A national-level, 24-hour offline hackathon at K.C. College, Thane, with four tracks.',
+    link: 'https://singularityhack.in/'
   },
   {
     type: 'achievement',
-    title: 'SINGULARITY Hackathon Organizer',
-    organization: 'Intra-College 24hr Event',
-    date: 'Recent',
-    description: 'Successfully organized and conducted an intra-college 24-hour hackathon named SINGULARITY, fostering innovation and rapid prototyping among students.'
+    title: 'Hackathon Organiser',
+    organization: 'SINGULARITY 1.0',
+    date: 'Past',
+    description: 'A 24-hour intra-college hackathon with 400+ participants, 120+ teams and 120+ projects.'
+  },
+  {
+    type: 'education',
+    title: 'B.Tech in Computer Engineering',
+    organization: 'K. C. College of Engineering and Management Studies and Research, Thane',
+    date: 'Expected 2029',
+    description: 'Undergraduate degree in progress.'
   }
 ];
 

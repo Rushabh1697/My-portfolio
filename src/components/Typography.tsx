@@ -4,7 +4,7 @@ import type { MotionValue } from 'framer-motion';
 import { TIMELINE } from './hero/timeline';
 
 const NAME = 'Rushabh Makwana';
-// Matches the title in src/content/resume.md.
+// Matches the role in src/content/resume.ts.
 const ROLE = 'Web Developer · Founder, PIXEL Forge';
 
 interface TitleProps {

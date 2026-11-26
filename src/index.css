@@ -27,3 +27,23 @@ body {
   padding: 0;
   overscroll-behavior: none;
 }
+
+@media print {
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  /* The open resume locks scrolling on screen, which would cut the printout. */
+  html,
+  body {
+    overflow: visible !important;
+    background: white !important;
+  }
+
+  .resume-overlay,
+  .resume-paper {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

@@ -50,7 +50,7 @@ const About: React.FC<AboutProps> = ({ onOpenResume }) => {
           transition={{ delay: 0.1 }}
           className="text-white/70 font-quote text-xl md:text-2xl tracking-wide max-w-xl uppercase"
         >
-          Open to new opportunities, collaborations, and building AI-native products.
+          Open to web development internships and freelance work.
         </motion.p>
 
         <motion.div

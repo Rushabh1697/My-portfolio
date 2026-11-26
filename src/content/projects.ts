@@ -65,11 +65,10 @@ export const PROJECTS: Project[] = [
     code: 'https://github.com/kc-ecell/Attendence-system-by-rushabh',
   },
   {
-    name: 'SkillBuildz',
-    description: 'Event registration and project submission platform.',
-    stack: ['Next.js', 'Supabase'],
-    image: '/projects/skillbuildz.jpg',
-    live: 'https://web3skillbuildz.vercel.app',
-    code: 'https://github.com/kc-ecell/web3skillbuildz',
+    name: 'The Commons',
+    description: 'Website for a KC College campus app, made by KC E-Cell: landing page, feature demos, roadmap and blog.',
+    stack: ['Next.js', 'Tailwind CSS'],
+    image: '/projects/the-commons.jpg',
+    live: 'https://the-commons-web.vercel.app',
   },
 ];
