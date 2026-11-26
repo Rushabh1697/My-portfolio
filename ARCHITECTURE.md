@@ -41,7 +41,19 @@ The hero is a tall section (`380vh`) with a full-screen stage that stays pinned 
 - **No WebGL2, lost context, or sampling failure:** the suit crossfades into the photo on scroll.
 - The render loop stops while the hero is off screen.
 
-## 5. Changing a photo
+## 5. Sections below the opening
+
+| Section | File | Notes |
+|---|---|---|
+| Navigation | `Nav.tsx` | Appears after the opening; compact menu on phones |
+| Skills | `Skills.tsx` | Cards dock from alternate sides |
+| Journey | `Experience.tsx` | Line on the left on phones, centred with alternating entries on wider screens |
+| Selected Work | `Projects.tsx` | Cards rendered from `src/content/projects.ts`, in order |
+| Contact | `About.tsx` | Email and resume actions, then profile links |
+
+To add a project, add an entry to `src/content/projects.ts` and, if it is deployed, a 960x600 screenshot in `public/projects/`.
+
+## 6. Changing a photo
 
 1. Put a transparent cutout in `public/hero/`.
 2. In `timeline.ts`, update the size, `headTop`, `centerX` and `scale` so heads and arms line up.

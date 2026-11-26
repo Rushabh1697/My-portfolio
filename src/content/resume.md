@@ -12,7 +12,7 @@ email: "rushabhmakwana784@gmail.com"
 
 ### Founder & Lead Developer
 **PIXEL Forge** • *Present*
-- Founded PIXEL Forge (https://pixelforge-ruddy.vercel.app/), a development agency focused on modern web solutions.
+- Founded PIXEL Forge (https://pixelforge-web-eta.vercel.app/), a development agency focused on modern web solutions.
 - Lead the architecture and development of client projects.
 
 ### Web Dev Co-head

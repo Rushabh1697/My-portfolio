@@ -48,10 +48,10 @@ const ResumeView: React.FC<ResumeViewProps> = ({ isOpen, onClose }) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-md p-4 md:p-8 print:bg-white print:p-0 print:block"
+          className="fixed inset-0 z-[100] flex flex-col items-center justify-center gap-3 bg-black/80 backdrop-blur-md p-3 md:p-8 print:bg-white print:p-0 print:block"
         >
           {/* Controls - Hidden during print */}
-          <div className="absolute top-6 right-6 flex gap-4 z-50 print:hidden">
+          <div className="shrink-0 w-full max-w-4xl flex justify-end gap-3 print:hidden">
             <button 
               onClick={handlePrint}
               className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md font-title tracking-wider uppercase transition-colors"
@@ -61,6 +61,7 @@ const ResumeView: React.FC<ResumeViewProps> = ({ isOpen, onClose }) => {
             </button>
             <button 
               onClick={onClose}
+              aria-label="Close resume"
               className="p-2 bg-white/10 hover:bg-white/20 text-white rounded-full transition-colors"
             >
               <X size={24} />
@@ -72,14 +73,14 @@ const ResumeView: React.FC<ResumeViewProps> = ({ isOpen, onClose }) => {
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 50, opacity: 0 }}
-            className="w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-zinc-900 rounded-xl shadow-2xl custom-scrollbar print:max-h-none print:overflow-visible print:bg-white print:shadow-none print:rounded-none"
+            className="w-full max-w-4xl min-h-0 overflow-y-auto break-words bg-zinc-900 rounded-xl shadow-2xl custom-scrollbar print:max-h-none print:overflow-visible print:bg-white print:shadow-none print:rounded-none"
           >
-            <div className="p-8 md:p-12 lg:p-16">
+            <div className="p-5 sm:p-8 md:p-12 lg:p-16">
               
               {/* Header section (Rendered from Frontmatter data manually for styling) */}
               <div className="border-b border-white/10 print:border-black/20 pb-8 mb-8">
-                <h1 className="text-4xl md:text-5xl font-title uppercase text-white print:text-black tracking-tight mb-2">Rushabh H. Makwana</h1>
-                <h2 className="text-xl md:text-2xl text-red-500 font-hud tracking-widest uppercase mb-6">Web Developer & Founder</h2>
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-title uppercase text-white print:text-black tracking-tight mb-2">Rushabh H. Makwana</h1>
+                <h2 className="text-sm sm:text-xl md:text-2xl text-red-500 font-hud tracking-widest uppercase mb-6">Web Developer & Founder</h2>
                 
                 <p className="text-white/70 print:text-black/80 max-w-2xl leading-relaxed mb-6">
                   Web Developer and founder of PIXEL Forge. Passionate about creating responsive, high-performance web applications and orchestrating technical events.
