@@ -1,16 +1,16 @@
-import React from 'react';
-import { Code, GitCommit, Briefcase, Camera, Phone, Mail, ArrowRight, FileText } from 'lucide-react';
+import React, { useState } from 'react';
+import { Code, Globe, Briefcase, Camera, Phone, Mail, ArrowRight, FileText } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const EMAIL = 'rushabhmakwana784@gmail.com';
+const GMAIL_COMPOSE = `https://mail.google.com/mail/?view=cm&fs=1&to=${EMAIL}`;
 
 const LINKS = [
   { label: 'GitHub', href: 'https://github.com/Rushabh1697', icon: Code },
-  { label: 'GitLab', href: 'https://gitlab.com/Rushabh1697', icon: GitCommit },
+  { label: 'Pixel Forge', href: 'https://pixelforge-web-eta.vercel.app', icon: Globe },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/rushabh-makwana-43590030a', icon: Briefcase },
   { label: 'Instagram', href: 'https://www.instagram.com/_.rushhhhh._16/', icon: Camera },
   { label: 'Phone', href: 'tel:9321144797', icon: Phone },
-  { label: 'Email', href: `mailto:${EMAIL}`, icon: Mail }
 ];
 
 interface AboutProps {
@@ -18,6 +18,17 @@ interface AboutProps {
 }
 
 const About: React.FC<AboutProps> = ({ onOpenResume }) => {
+  const [copied, setCopied] = useState(false);
+  // Phones have a mail app. Many computers have none set up, so a mailto: link
+  // does nothing there; they get Gmail in a new tab instead.
+  const [touch] = useState(() => window.matchMedia('(hover: none)').matches);
+  const emailHref = touch ? `mailto:${EMAIL}` : GMAIL_COMPOSE;
+  // Copying too covers visitors who use some other mail service.
+  const copyEmail = () => {
+    navigator.clipboard?.writeText(EMAIL).then(() => setCopied(true), () => {});
+  };
+  const links = [...LINKS, { label: 'Email', href: emailHref, icon: Mail }];
+
   return (
     <section className="relative w-full min-h-[70vh] bg-zinc-950 py-24 md:py-32 px-5 md:px-12 lg:px-24 flex flex-col justify-center overflow-hidden border-t border-white/5">
 
@@ -61,7 +72,10 @@ const About: React.FC<AboutProps> = ({ onOpenResume }) => {
           className="mt-9 flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
         >
           <a
-            href={`mailto:${EMAIL}`}
+            href={emailHref}
+            target={touch ? undefined : '_blank'}
+            rel={touch ? undefined : 'noopener noreferrer'}
+            onClick={copyEmail}
             data-glow
             className="inline-flex items-center justify-center gap-3 px-10 py-4 bg-red-600 hover:bg-red-700 text-white text-lg font-title tracking-widest uppercase transition-all rounded-sm shadow-[0_0_30px_rgba(220,38,38,0.45)] hover:shadow-[0_0_45px_rgba(220,38,38,0.8)]"
           >
@@ -78,14 +92,20 @@ const About: React.FC<AboutProps> = ({ onOpenResume }) => {
           )}
         </motion.div>
 
-        <div className="w-full mt-14 md:mt-20 grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
-          {LINKS.map((link, idx) => {
+        <p role="status" className="mt-5 mb-0 font-hud text-xs md:text-sm text-white/70 select-text break-all">
+          {EMAIL}
+          {copied && <span className="text-red-400"> • copied</span>}
+        </p>
+
+        <div className="w-full mt-14 md:mt-16 grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+          {links.map((link, idx) => {
             const Icon = link.icon;
             return (
               <motion.a
                 key={link.label}
                 href={link.href}
                 aria-label={link.label}
+                onClick={link.label === 'Email' ? copyEmail : undefined}
                 target={link.href.startsWith('http') ? "_blank" : undefined}
                 rel={link.href.startsWith('http') ? "noopener noreferrer" : undefined}
                 initial={{ opacity: 0, y: 20 }}
