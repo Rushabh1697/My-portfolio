@@ -30,6 +30,7 @@ const ProjectCard: React.FC<{ project: Project; index: number }> = ({ project, i
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: 0.6, delay: (index % 2) * 0.12, ease: [0.16, 1, 0.3, 1] }}
+      data-glow
       className="group flex flex-col border border-white/10 bg-white/[0.02] hover:border-red-500/50 transition-colors duration-300"
     >
       {/* The picture repeats the main link, so keyboards and screen readers skip it. */}

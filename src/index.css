@@ -2,6 +2,22 @@
 @import "tailwindcss";
 @config "../tailwind.config.js";
 
+/* `hover:` and `group-hover:` also work on touch screens: while an element is
+   pressed, or while useTouchGlow has lit it near the middle of the screen. */
+@custom-variant hover {
+  @media (hover: hover) {
+    &:hover {
+      @slot;
+    }
+  }
+  @media (hover: none) {
+    &:active,
+    &[data-lit] {
+      @slot;
+    }
+  }
+}
+
 body {
   background-color: #050000;
   color: white;

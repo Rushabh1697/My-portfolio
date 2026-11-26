@@ -38,6 +38,7 @@ const SkillCard: React.FC<{ group: (typeof SKILLS)[number]; index: number }> = (
       // Accelerates into place, so the landing reads as a lock.
       transition={{ duration: 0.55, delay: (index % 2) * 0.12, ease: [0.55, 0, 0.85, 0.35] }}
       onAnimationComplete={() => setDocked(true)}
+      data-glow
       className="group relative p-6 md:p-8 border border-white/10 bg-white/[0.02] backdrop-blur-sm overflow-hidden"
     >
       <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${group.color} opacity-60 group-hover:opacity-100 transition-opacity duration-500`} />
@@ -60,6 +61,7 @@ const SkillCard: React.FC<{ group: (typeof SKILLS)[number]; index: number }> = (
         {group.items.map((item) => (
           <li
             key={item}
+            data-glow
             className="px-3 md:px-4 py-2 text-xs md:text-sm font-hud tracking-wider bg-white/5 text-white/80 border border-white/10 hover:border-red-500/50 hover:bg-red-900/20 transition-colors duration-300 cursor-default"
           >
             {item}

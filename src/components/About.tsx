@@ -62,13 +62,15 @@ const About: React.FC<AboutProps> = ({ onOpenResume }) => {
         >
           <a
             href={`mailto:${EMAIL}`}
-            className="inline-flex items-center justify-center gap-3 px-10 py-4 bg-red-600 hover:bg-red-700 text-white text-lg font-title tracking-widest uppercase transition-colors rounded-sm shadow-[0_0_30px_rgba(220,38,38,0.45)]"
+            data-glow
+            className="inline-flex items-center justify-center gap-3 px-10 py-4 bg-red-600 hover:bg-red-700 text-white text-lg font-title tracking-widest uppercase transition-all rounded-sm shadow-[0_0_30px_rgba(220,38,38,0.45)] hover:shadow-[0_0_45px_rgba(220,38,38,0.8)]"
           >
             <Mail className="w-5 h-5" /> Email me
           </a>
           {onOpenResume && (
             <button
               onClick={onOpenResume}
+              data-glow
               className="inline-flex items-center justify-center gap-3 px-8 py-4 border border-white/25 hover:border-white/70 bg-black/40 text-white text-lg font-title tracking-widest uppercase transition-colors rounded-sm"
             >
               <FileText className="w-5 h-5" /> View full resume
@@ -90,6 +92,7 @@ const About: React.FC<AboutProps> = ({ onOpenResume }) => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.06 }}
+                data-glow
                 className="group flex items-center justify-between gap-3 p-4 md:p-6 bg-black/40 backdrop-blur-sm border border-white/10 hover:border-red-500/60 hover:bg-white/[0.05] transition-colors duration-300"
               >
                 <div className="flex items-center gap-3 md:gap-4 min-w-0">

@@ -7,11 +7,13 @@ import Projects from './components/Projects';
 import About from './components/About';
 import ResumeView from './components/ResumeView';
 import Nav from './components/Nav';
+import { useTouchGlow } from './hooks/useTouchGlow';
 import { MotionConfig } from 'framer-motion';
 import { Agentation } from 'agentation';
 
 function App() {
   const [showResume, setShowResume] = useState(false);
+  useTouchGlow();
 
   return (
     <>

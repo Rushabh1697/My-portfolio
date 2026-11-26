@@ -51,6 +51,8 @@ The hero is a tall section (`380vh`) with a full-screen stage that stays pinned 
 | Selected Work | `Projects.tsx` | Cards rendered from `src/content/projects.ts`, in order |
 | Contact | `About.tsx` | Email and resume actions, then profile links |
 
+**Touch screens:** `hover:` styles also apply while an element is pressed, and to elements marked `data-glow` while they cross the middle of the screen (`src/hooks/useTouchGlow.ts` and the `hover` variant in `src/index.css`).
+
 To add a project, add an entry to `src/content/projects.ts` and, if it is deployed, a 960x600 screenshot in `public/projects/`.
 
 ## 6. Changing a photo
